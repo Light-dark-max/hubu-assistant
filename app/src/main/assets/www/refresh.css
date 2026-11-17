@@ -1,0 +1,10 @@
+.primary-button:disabled{cursor:wait;opacity:.7}
+.primary-button.refreshing>svg:first-child{animation:refresh-turn 1.2s linear infinite}
+.sync-feedback{font-size:11px;line-height:1.8;padding:11px 13px;border-radius:10px;margin:12px 0 0;background:#e9eee4;color:#526d52;overflow-wrap:anywhere}
+.sync-feedback.error,.sync-feedback.login{background:#f5ebd9;color:#946528}
+.sync-feedback.success{background:#e0ecdf;color:#416d52}
+.school-link{display:block;margin:-12px auto 22px;background:none;color:#61785b;font-size:11px;padding:10px}
+.school-link span{margin-left:6px}
+.school-link:disabled{opacity:.5;cursor:wait}
+@keyframes refresh-turn{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.primary-button.refreshing>svg:first-child{animation:none}}

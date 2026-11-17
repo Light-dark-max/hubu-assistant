@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 6 fallback. Shape gradients work without vector gradient support. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item><shape><gradient android:startColor="#F7FAFA" android:centerColor="#F2F6F6" android:endColor="#D4E9E8" android:angle="315"/><corners android:radius="24dp"/></shape></item>
+    <item android:drawable="@drawable/ic_energy_foreground"/>
+</layer-list>

@@ -1,0 +1,21 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.hubu.energy'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'com.hubu.energy'
+        minSdk 23
+        targetSdk 35
+        versionCode 17
+        versionName '0.8-beta'
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.12.1'
+    implementation files('libs/jsoup-1.18.3.jar')
+}
+
+
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/tasks_widget_root" android:layout_width="match_parent" android:layout_height="match_parent" android:padding="16dp" android:orientation="vertical" android:background="@drawable/widget_background">
+  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="12dp">
+    <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="@string/tasks_widget_title" android:textStyle="bold" android:textColor="#087F7D" android:textSize="16sp" />
+    <TextView android:id="@+id/tasks_widget_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#526C72" android:textSize="13sp" />
+  </LinearLayout>
+  <TextView android:id="@+id/tasks_widget_empty" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="15dp" android:textColor="#526C72" android:textSize="13sp" />
+  <LinearLayout android:id="@+id/tasks_widget_rows" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" />
+  <TextView android:id="@+id/tasks_widget_cache" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="#526C72" android:textSize="11sp" android:maxLines="2" />
+</LinearLayout>

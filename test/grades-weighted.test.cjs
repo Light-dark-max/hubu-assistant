@@ -1,0 +1,14 @@
+const assert=require('node:assert/strict');
+const Grades=require('../app/src/main/assets/www/grades.js');
+const row=(score,credits,attribute='必修',category='专业课')=>({score,credits,attribute,category});
+let r=Grades.weightedAverage([row('80','3'),row('90','1'),row('10','8','公选','公共选修课')]);
+assert.equal(r.average,82.5);assert.equal(r.credits,4);assert.equal(r.count,2);assert.equal(r.publicCount,1);
+for(const [attribute,category] of [['公选',''],['','公共选修课'],['公选课',''],['必修','公共 选修课']])assert.equal(Grades.publicElective({attribute,category}),true);
+assert.equal(Grades.publicElective(row('88','2','专选','专业选修课')),false);
+r=Grades.weightedAverage([row('0','1'),row('100','1'),row('良','2'),row('','2'),row('101','1'),row('85','0'),row('90',''),row('90','2','','')]);
+assert.equal(r.average,50);assert.equal(r.scoreSkipped,3);assert.equal(r.creditSkipped,2);assert.equal(r.unknownCount,1);
+r=Grades.weightedAverage([row('90','1.5'),row('60','0.5'),row('99','2','公选')]);assert.equal(r.average,82.5);assert.equal(r.credits,2);
+assert.equal(Grades.weightedAverage([]).average,null);
+assert.equal(Grades.weightedAverage([row('良','2'),row('90','2','公选')]).average,null);
+assert.equal(Grades.weightedAverage([row('80','1'),row('100','1')]).count,2);
+console.log('Weighted grades: credit weighting, public elective exclusion, zero scores, textual scores, missing classification/credits, fractional credits and empty results passed.');

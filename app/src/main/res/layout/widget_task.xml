@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="70dp" android:layout_marginBottom="6dp" android:padding="10dp" android:gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/widget_course_background">
+  <TextView android:id="@+id/task_widget_kind" android:layout_width="34dp" android:layout_height="wrap_content" android:textSize="12sp" android:textStyle="bold" />
+  <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+    <TextView android:id="@+id/task_widget_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="end" android:textColor="#203B41" android:textSize="14sp" />
+    <TextView android:id="@+id/task_widget_detail" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:maxLines="1" android:ellipsize="end" android:textColor="#526C72" android:textSize="11sp" />
+  </LinearLayout>
+  <TextView android:id="@+id/task_widget_time" android:layout_width="65dp" android:layout_height="wrap_content" android:gravity="end" android:textColor="#B15B13" android:textSize="11sp" />
+</LinearLayout>

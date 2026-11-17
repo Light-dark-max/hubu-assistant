@@ -1,0 +1,222 @@
+/* Approved v0.6 direction: 雾白冰青 · 液态玻璃. Hierarchy §2.1; grouping §3.6;
+   type/spacing scales §1.5; glass highlights are the user's deliberate convention.
+   Keep semantic --teal / --air and all data contracts. Glass degrades to opaque white
+   when backdrop-filter is unavailable; no external fonts, images or dependencies. */
+:root{--paper:#f2f6f6;--panel:#f5fbfa;--ink:#203b41;--muted:#526c72;--teal:#087f7d;--air:#4c677b;--glass:linear-gradient(145deg,#ffffffda,#ffffff87);--glass-shadow:inset 0 1px 1px #fff,inset 0 -1px 1px #9eb9c01f,0 8px 24px #355b6810;--radius:28px;--line:#a4bebc38;color-scheme:light}
+body{background:var(--paper);font-size:14px;line-height:1.5}
+.app{position:relative;isolation:isolate;max-width:520px;min-height:100vh;overflow:hidden}
+.glass-atmosphere{position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 100% 600px at 105% 280px,#aedbe08c,transparent 80%),radial-gradient(ellipse 100% 600px at -10% 800px,#c7e5de8c,transparent 80%),linear-gradient(160deg,#f7f8f8,#eaf2f2 900px,#f5f8f7)}
+.glass-atmosphere:after{content:'';position:absolute;width:380px;height:480px;top:190px;left:45%;border-radius:50%;transform:rotate(-36deg);background:linear-gradient(105deg,#ffffff04 12%,#fff8 43%,#8ec4ce33 47%,#fff9 48%,#c6e0e530 62%,#f9ffff77);box-shadow:inset 2px 0 2px #fff,inset -7px 2px 12px #508a9d1c}
+.app-header{padding:28px 24px 16px;align-items:center;gap:16px}
+.app-brand{font-size:12px;letter-spacing:1px;color:var(--muted)}
+.app-header h1{font-size:36px;line-height:1.3;font-weight:600;letter-spacing:-1px;margin-top:4px}
+.app-header h1:after{content:'.';color:var(--teal);margin-left:3px}
+.room-button{display:flex;align-items:center;gap:8px;min-height:52px;max-width:52%;padding:10px 12px;border:1px solid #fff;border-radius:24px;background:var(--glass);box-shadow:var(--glass-shadow);text-align:left}
+.room-button svg{width:16px;height:16px;color:var(--teal)}
+.room-button small{display:block;font-size:11px;color:var(--muted)}
+.room-button strong{display:block;font-size:12px;font-weight:600;max-width:126px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.room-button>span:last-child{font-size:12px;color:var(--muted)}
+.page{padding:8px 24px 128px}
+.panel,.agenda-days,.agenda-course,.week-toolbar,.timetable-view-control{background:var(--glass);border:1px solid #ffffffd4;box-shadow:var(--glass-shadow);border-radius:var(--radius)}
+.panel{padding:24px;margin-bottom:24px}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.demo-banner{font-size:11px;line-height:1.6;background:transparent;color:var(--muted);padding:4px 0;margin:0 0 20px;border-radius:0;justify-content:flex-start;gap:8px}
+.demo-banner:before{content:'';height:4px;width:4px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.demo-banner button{color:var(--teal);margin-left:auto;padding:8px 0;min-height:36px}
+.home-date{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--muted);margin:0 0 16px}
+.home-date small{font-size:12px}
+.today-card{position:relative;background:radial-gradient(ellipse at 100% 100%,#d0ebec75,transparent 75%),linear-gradient(140deg,#ffffffed,#ffffff8f);padding:24px;overflow:hidden}
+.today-card .panel-title{font-size:12px;color:var(--muted);margin-bottom:20px}
+.today-card .panel-title small{font-size:11px;background:#e0eded;border-radius:16px;color:#355c63;padding:4px 10px}
+.panel-title{font-size:16px;font-weight:500}
+.panel-title svg{width:16px;height:16px}
+.today-card .course-row{display:grid;grid-template-columns:1fr;gap:8px;padding:16px 0;border:0;border-top:1px solid var(--line);position:relative}
+.today-card .course-row:first-child{padding-top:0;border-top:0}
+.today-card .course-row>i{position:absolute;left:-12px;top:24px;min-height:24px;width:3px;opacity:.65}
+.today-card .course-clock{font-size:36px;line-height:1.2;letter-spacing:-1px;color:var(--ink);width:auto;display:flex;align-items:baseline;gap:12px;font-variant-numeric:tabular-nums}
+.today-card .course-clock span{display:inline;font-size:11px;letter-spacing:0;color:var(--muted)}
+.today-card .course-copy strong{font-size:20px;font-weight:600;line-height:1.5}
+.today-card .course-copy small{font-size:12px;line-height:1.8;margin-top:8px;color:var(--muted)}
+.today-card .course-row:not(:first-child){display:flex;gap:12px;align-items:center;margin-top:16px;padding:16px 0 8px}
+.today-card .course-row:not(:first-child) .course-clock{font-size:20px;min-width:64px;display:block;letter-spacing:0}
+.today-card .course-row:not(:first-child) .course-clock span{display:block;margin-top:4px}
+.today-card .course-row:not(:first-child) .course-copy strong{font-size:14px;font-weight:500}
+.today-card .course-row:not(:first-child) .course-copy small{font-size:11px;margin-top:4px}
+.today-card .course-row:not(:first-child)>i{position:static;min-height:32px;flex-shrink:0}
+.card-footer{border-top:1px solid var(--line);padding-top:16px;margin:8px 0 0;align-items:center;font-size:12px;color:var(--muted)}
+.glass-arrow{height:44px;width:44px;display:grid;place-items:center;flex-shrink:0;border:1px solid #fff;border-radius:50%;background:linear-gradient(145deg,#fff,#e1f1ef);box-shadow:var(--glass-shadow);color:var(--teal)}
+.glass-arrow svg{height:18px;width:18px}
+.home-section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px}
+.home-section-heading h2{font-size:16px;font-weight:600;margin:0}
+.home-section-heading .text-button{font-size:12px;color:var(--muted)}
+.dorm-card{padding:20px 8px;border-radius:24px;margin-bottom:8px}
+.home-balances{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.fee-line{min-width:0;display:flex;align-items:flex-start;flex-direction:column;gap:0;margin:0;padding:0 12px}
+.fee-line+.fee-line{border-left:1px solid var(--line)}
+.fee-line svg{width:16px;height:16px;color:var(--teal);align-self:flex-start;margin-bottom:8px}
+.fee-line>span:first-of-type,.fee-line small{font-size:11px;color:var(--muted)}
+.fee-line strong{font-size:28px;line-height:1.4;font-weight:400;letter-spacing:-1px;white-space:nowrap;margin-top:4px}
+.fee-line:last-child strong{font-size:24px;margin-top:8px}
+.fee-line .status{font-size:10px;line-height:1.6;overflow-wrap:anywhere;color:var(--muted);margin:8px 0 0;max-width:100%}
+.home-balance-meta{display:flex;align-items:center;gap:8px;margin:0 0 24px;color:var(--muted)}
+.home-balance-meta .muted{margin:0;flex:1;min-width:0;overflow-wrap:anywhere}
+.home-balance-meta svg{width:16px;height:16px;color:var(--teal)}
+.campus-services{margin-bottom:24px}
+.widget-promo{background:transparent;box-shadow:none;border:0;border-radius:0;display:flex;width:100%;align-items:center;gap:12px;text-align:left;padding:8px 0;font-size:14px}
+.widget-promo span{display:block}
+.widget-promo small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.widget-promo .service-icon{height:44px;width:44px;flex-shrink:0;display:grid;place-items:center;border:1px solid #fff;border-radius:16px;background:var(--glass);box-shadow:var(--glass-shadow)}
+.widget-promo .service-icon svg{width:20px;height:20px;color:var(--teal)}
+.widget-promo>svg,.widget-promo>b{margin-left:auto;color:var(--muted);width:16px;height:16px;font-size:20px;font-weight:400}
+.home-usage{border-top:1px solid var(--line);padding:16px 0;font-size:12px;color:var(--muted)}
+.home-usage summary{min-height:36px;cursor:pointer;color:var(--ink)}
+.home-usage summary span{float:right;font-size:11px;color:var(--muted)}
+.chart-summary{font-size:12px;margin-top:12px;color:var(--muted)}
+.usage-chart{height:140px;gap:12px}
+.chart-space{border-bottom:1px solid var(--line)}
+.bar{border-radius:6px 6px 2px 2px;max-width:24px}
+.bar.air-bar{border-radius:0 0 4px 4px}
+.legend,.legend span{font-size:11px;color:var(--muted);flex-wrap:wrap}
+.chart-column small{font-size:11px;color:var(--muted)}
+.footnote{font-size:11px;color:var(--muted);line-height:1.8;margin:24px 0 0}
+.bottom-nav{bottom:max(12px,env(safe-area-inset-bottom));width:calc(100% - 32px);max-width:472px;padding:6px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));isolation:isolate;background:linear-gradient(170deg,#ffffffed,#eef6f4e8);border:1px solid #fff;border-radius:32px;box-shadow:inset 0 1px 2px #fff,inset 0 -1px 3px #9bb5bc38,0 8px 24px #38566018;backdrop-filter:blur(22px) saturate(145%);-webkit-backdrop-filter:blur(22px) saturate(145%)}
+.bottom-nav button{position:relative;min-height:56px;min-width:0;gap:4px;padding:4px 0;color:var(--muted);font-size:11px;font-weight:400;z-index:1}
+.bottom-nav button.active{color:var(--teal);font-weight:600}
+.bottom-nav button.active:before{display:none}
+.bottom-nav svg{width:20px;height:20px}
+.nav-lens{position:absolute;left:6px;top:5px;bottom:5px;width:calc((100% - 12px)/5);border-radius:28px;background:linear-gradient(160deg,#fff,#cae6e3a8);box-shadow:inset 0 1px 2px #fff,inset 0 -1px 2px #72aaa633,0 3px 8px #527d7812;z-index:0;pointer-events:none}
+.primary-button{min-height:48px;border-radius:24px;padding:14px 20px;background:var(--teal);font-size:14px;line-height:1.5;font-weight:500}
+.primary-button:active{background:#086866}
+.text-button{min-height:36px;font-size:12px}
+.small-note,.muted{font-size:12px;color:var(--muted);line-height:1.9}
+.page-actions{gap:12px;margin-bottom:24px;align-items:center}
+.page-actions>button{background:none;color:var(--muted);padding:8px 0}
+.fee-grid{gap:12px;margin-bottom:24px}
+.fee-grid .panel{padding:24px 16px;margin-bottom:0;border-radius:24px}
+.metric-heading{font-size:12px;color:var(--muted);gap:4px}
+.metric-heading button{min-width:36px;min-height:36px;background:none;color:var(--teal)}
+.metric strong{font-size:32px;font-weight:400;letter-spacing:-1px;white-space:nowrap}
+.metric strong small{font-size:12px;font-weight:400;letter-spacing:0}
+.metric p,.metric>small{color:var(--muted);font-size:11px;line-height:1.8}
+.water-metric{grid-column:1/-1}
+.water-metric strong{font-size:28px}
+.range-control{display:flex;gap:4px;flex-wrap:wrap}
+.range-control button{border-radius:16px;padding:8px;font-size:11px;background:transparent;color:var(--muted);min-height:36px}
+.range-control button.selected{background:#dcece9;color:#24544e}
+.history-row{padding:16px 0;border-bottom:1px solid var(--line);font-size:12px;line-height:1.8}
+.history-row span{color:var(--muted);font-size:11px}
+.feedback{border-radius:16px;background:#e4efec;color:#365d57;padding:16px;font-size:12px;line-height:1.8;margin-bottom:20px}
+.feedback.error,.feedback.warning,.warning{background:#f4e9d9;color:#765126}
+.empty-state{margin:24px 0;padding:32px 24px;background:#f7fbf9c9;border:1px solid #fff;border-radius:24px;color:var(--muted);font-size:14px}
+.empty-state h3{color:var(--ink);font-size:20px;font-weight:500}
+.empty-message{font-size:14px;line-height:1.9;color:var(--muted);padding:28px 0}
+.grade-query{padding:24px}
+.grade-query .panel-title{margin-bottom:24px}
+.grade-query label{color:var(--muted);font-size:12px}
+.grade-controls{gap:12px;flex-wrap:wrap}
+.grade-controls select{min-height:48px;padding:12px;background:#f8fcfb;border:1px solid #b7ceca;border-radius:16px;font-size:14px;flex-basis:150px}
+.grade-controls .primary-button{border-radius:16px;justify-content:center;flex-grow:1}
+.grade-weighted{background:linear-gradient(140deg,#ffffffed,#e2f1eec9);padding:28px 24px}
+.grade-weighted h3{font-size:12px;font-weight:400;color:var(--muted);margin:0 0 16px}
+.grade-weighted>strong{font-size:56px;line-height:1.3;font-weight:400;letter-spacing:-2px;color:var(--ink)}
+.grade-weighted>span{color:var(--muted)}
+.grade-weighted .small-note{font-size:11px;margin-top:12px}
+.grade-weighted .small-note:last-child{border-top:1px solid var(--line);padding-top:12px}
+.grade-summary{gap:12px}
+.grade-summary>div{background:#ffffff80;padding:16px;border-radius:16px}
+.grade-summary strong{font-size:24px;font-weight:400;color:var(--ink)}
+.grade-summary small{font-size:11px;color:var(--muted)}
+.grade-card{background:transparent;border:0;border-radius:0;box-shadow:none;padding:16px 0;margin:0;border-bottom:1px solid var(--line)}
+.grade-heading h3{font-size:16px;font-weight:500;line-height:1.6}
+.grade-score{font-size:28px;font-weight:400;color:var(--ink)}
+.grade-score.low{color:#984736}
+.grade-card>.small-note{font-size:11px;line-height:1.8}
+.grade-card details{border-top:0;padding-top:0;font-size:12px;color:var(--muted)}
+.grade-card summary{padding:8px 0;min-height:36px}
+.grade-card dt{color:var(--muted)}
+.settings-panel h3{font-size:16px;font-weight:500}
+.settings-panel p{color:var(--muted);font-size:12px;line-height:1.9}
+.settings-panel input{background:#f9fcfb;border:1px solid #b7ceca;border-radius:16px;padding:12px;min-height:48px;color:var(--ink);font-size:16px}
+.settings-panel label{font-size:12px;color:var(--muted);margin-bottom:8px}
+.settings-panel form{gap:12px}
+.settings-links button{border-bottom:1px solid var(--line);padding:20px 0;min-height:56px;font-size:14px;background:none}
+.settings-links button:last-child{border-bottom:0;color:#984736}
+.modal-shade{background:#1d42414a;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.modal-card{background:#f5fbfa;border:1px solid #fff;border-radius:28px;box-shadow:0 24px 64px #203b4133;padding:28px;max-width:400px}
+.modal-card h2{font-size:24px;font-weight:500;color:var(--ink)}
+.modal-card p{color:var(--muted);font-size:14px;line-height:1.9}
+.modal-actions{gap:12px}
+.modal-actions button{border-radius:20px;min-height:48px;background:#e3eeeb;color:#355b55;font-size:14px}
+.modal-actions button:last-child{background:var(--teal)}
+.editor-card{padding:24px;max-width:440px}
+.editor-card form{gap:10px}
+.editor-card .editor-note{font-size:12px;color:var(--muted);line-height:1.8}
+.editor-card label,.color-field legend{font-size:12px;color:var(--muted)}
+.editor-card input:not([type=color]),.editor-card select{border-radius:12px;background:#fff;border:1px solid #b7ceca;color:var(--ink);font-size:16px;min-height:48px;padding:12px}
+.editor-card input:read-only{background:#e9f0ed;color:#526c72}
+.editor-fields{gap:12px;margin:8px 0}
+.color-field{border-radius:16px;border-color:#b7ceca;padding:16px;margin:12px 0}
+.color-swatches{gap:12px}
+.color-swatch{width:32px;height:32px}
+.color-swatch[aria-pressed=true]{box-shadow:0 0 0 2px var(--teal)}
+.course-color-preview{border-radius:12px}
+.editor-heading button{color:var(--muted);min-height:40px;min-width:40px}
+.editor-actions{gap:12px}
+.danger-button{border-radius:20px;background:#f4e7e2;color:#984736;min-height:48px}
+.toast{background:#254c4a;color:#fff;bottom:100px;font-size:12px;border-radius:16px;max-width:calc(100% - 48px)}
+.timetable-page{padding-left:24px;padding-right:24px}
+.timetable-page .week-toolbar,.timetable-page .term-toolbar,.timetable-page>.feedback,.timetable-page>.small-note,.timetable-page>.panel{width:auto;margin-left:0;margin-right:0}
+.timetable-view-control{display:flex;padding:4px;margin:0 0 16px;border-radius:24px;width:fit-content}
+.timetable-view-control button{min-height:36px;border-radius:20px;padding:8px 20px;background:none;color:var(--muted);font-size:12px}
+.timetable-view-control button[aria-pressed=true]{background:#dcece9;color:#24544e;font-weight:500}
+.week-toolbar{padding:8px;gap:4px;margin-bottom:16px;border-radius:24px}
+.week-toolbar button,.week-toolbar select{background:transparent;min-height:40px;border-radius:16px;color:var(--ink);font-size:14px}
+.week-toolbar select{max-width:120px;border:0}
+.term-toolbar{font-size:11px;line-height:1.8;margin-bottom:16px;gap:8px}
+.term-toolbar span{color:var(--muted);flex-basis:100%}
+.term-toolbar .text-button{font-size:12px;min-height:40px}
+.timetable-scroll{border-radius:24px;background:#f8fcfbe0;border:1px solid #fff;margin-bottom:16px}
+.timetable-grid{background:#f8fcfb;min-width:616px;grid-template-columns:42px repeat(7,minmax(80px,1fr))}
+.grid-cell,.grid-period,.grid-head{border-color:#afc7c329}
+.grid-head{font-size:12px;color:var(--muted)}
+.grid-head.current{background:#deeeea;color:#24544e}
+.grid-head small{font-size:11px}
+.grid-period{color:var(--muted);font-size:12px}
+.grid-period small{font-size:9px;color:var(--muted)}
+.grid-course{border-radius:12px;margin:3px;padding:10px 6px}
+.grid-course strong{font-size:12px;font-weight:500;line-height:1.6}
+.grid-course small{font-size:11px;line-height:1.8}
+.agenda-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:12px 4px;gap:2px;margin-bottom:24px;border-radius:24px}
+.agenda-days button{border-radius:20px;min-height:64px;padding:8px 0;background:none;color:var(--muted);font-size:12px}
+.agenda-days button small{display:block;margin-top:8px;font-size:14px}
+.agenda-days button[aria-pressed=true]{color:#24544e;background:#d7e9e6;font-weight:600}
+.agenda-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.agenda-heading h2{font-size:16px;font-weight:500;margin:0}
+.agenda-heading span{font-size:12px;color:var(--muted)}
+.agenda-course{display:block;width:100%;padding:20px 16px;margin-bottom:12px;text-align:left}
+.agenda-course .course-row{padding:0;border:0;gap:12px}
+.agenda-course .course-clock{width:64px;font-size:20px;color:var(--ink);letter-spacing:-.5px}
+.agenda-course .course-clock span{font-size:11px;color:var(--muted);letter-spacing:0}
+.agenda-course .course-copy strong{font-size:14px;font-weight:500}
+.agenda-course .course-copy small{font-size:11px;line-height:1.8;color:var(--muted)}
+.agenda-course .course-row>i{width:3px;min-height:32px}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.room-button,.today-card,.dorm-card,.agenda-course,.agenda-days,.week-toolbar{backdrop-filter:blur(20px) saturate(135%);-webkit-backdrop-filter:blur(20px) saturate(135%)}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.panel,.room-button,.bottom-nav,.agenda-course,.agenda-days,.week-toolbar{background:#f7fcfb}}
+@media(min-width:600px){body{background:#e5eeee}.app{background:var(--paper);box-shadow:0 0 70px #1e47351a}.glass-atmosphere{display:block}}
+@media(max-width:380px){.page,.timetable-page{padding-left:16px;padding-right:16px}.app-header{padding-left:16px;padding-right:16px}.panel{padding:20px}.dorm-card{padding:20px 4px}.fee-line{padding:0 8px}.fee-line strong{font-size:24px}.fee-line:last-child strong{font-size:20px}.room-button{max-width:51%;gap:6px;padding:10px}.room-button strong{max-width:90px}.today-card .course-copy strong{font-size:18px}.metric strong{font-size:28px}.grade-controls{gap:8px}.grade-controls select{flex-basis:100%}.agenda-course{padding:20px 12px}.agenda-course .course-clock{width:58px;font-size:18px}.agenda-course .course-row{gap:8px}.editor-card{padding:20px}.editor-fields{gap:8px}}
+@media(prefers-reduced-motion:no-preference){.nav-lens{transition:transform .35s cubic-bezier(.22,1,.36,1)}button:active{filter:brightness(.98)}}
+@media(prefers-reduced-transparency:reduce){.panel,.room-button,.bottom-nav,.agenda-course,.agenda-days,.week-toolbar{background:#f7fcfb;backdrop-filter:none;-webkit-backdrop-filter:none}.glass-atmosphere:after{display:none}}
+/* Usage detail: values first, secondary date/estimate labels; existing glass palette. */
+#fees-chart{gap:0}
+#fees-chart .chart-column{appearance:none;background:transparent;border:0;border-radius:8px;padding:0;position:relative;color:inherit;font:inherit;overflow:visible}
+#fees-chart .chart-space{width:80%;pointer-events:none}
+#fees-chart .chart-column small{pointer-events:none}
+#fees-chart .chart-column.usage-selected .bar{filter:brightness(.84)}
+#fees-chart .chart-column.usage-selected small{color:var(--teal);font-weight:600}
+#fees-chart .chart-column:focus-visible{outline:none}
+#fees-chart .chart-column:focus-visible small{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.usage-popup{position:fixed;z-index:12;pointer-events:none;width:240px;padding:16px;border-radius:16px;border:1px solid var(--line);background:var(--panel);color:var(--ink);box-shadow:var(--glass-shadow);font-size:12px;line-height:1.8;overflow:auto;font-variant-numeric:tabular-nums}
+.usage-popup strong{display:block;font-size:12px;font-weight:600;margin-bottom:8px}
+.usage-popup span{display:block}
+.usage-popup span:last-child{margin-top:8px;padding-top:8px;border-top:1px solid var(--line);font-weight:600}
+

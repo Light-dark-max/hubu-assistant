@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="76dp" android:layout_marginBottom="8dp" android:padding="12dp" android:gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/widget_course_background">
+    <LinearLayout android:layout_width="53dp" android:layout_height="wrap_content" android:orientation="vertical">
+        <TextView android:id="@+id/course_start" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="14sp" android:textColor="#203B41" />
+        <TextView android:id="@+id/course_end" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:textSize="12sp" android:textColor="#526C72" />
+    </LinearLayout>
+    <TextView android:id="@+id/course_color" android:layout_width="4dp" android:layout_height="match_parent" android:background="#BA6AD2" android:layout_marginEnd="10dp" />
+    <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+        <TextView android:id="@+id/course_name" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="2" android:ellipsize="end" android:textColor="#203B41" android:textSize="14sp" />
+        <TextView android:id="@+id/course_detail" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="5dp" android:maxLines="1" android:ellipsize="end" android:textColor="#526C72" android:textSize="11sp" />
+    </LinearLayout>
+</LinearLayout>

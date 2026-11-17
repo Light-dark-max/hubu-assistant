@@ -1,0 +1,14 @@
+{
+  "name": "hubu-assistant",
+  "version": "0.8.0-beta",
+  "private": true,
+  "description": "湖北大学第三方 Android 校园助手",
+  "scripts": {
+    "preview": "node preview-server.cjs",
+    "test": "node test/run-unit.cjs",
+    "test:ui": "node test/local-ui.cjs && node test/liquid-ui.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

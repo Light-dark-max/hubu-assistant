@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f2f6f6">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none';script-src 'self';style-src 'self' 'unsafe-inline';img-src 'self' data:;connect-src 'none';base-uri 'none';form-action 'none'">
+<title>湖北大学助手</title><link rel="stylesheet" href="campus.css"><link rel="stylesheet" href="liquid.css"><link rel="stylesheet" href="tasks.css"><script src="schedule.js" defer></script><script src="grades.js" defer></script><script src="usage-chart.js" defer></script><script src="task-dates.js" defer></script><script src="task-badge.js" defer></script><script src="task-reminders.js" defer></script><script src="task-display.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 10h18M7 14h3m-3 3h3m4-3h3"/></symbol>
+<symbol id="bell" viewBox="0 0 24 24"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></symbol>
+<symbol id="bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 10-13h-8z"/></symbol>
+<symbol id="sync" viewBox="0 0 24 24"><path d="M20 8a8.5 8.5 0 0 0-14-3L3 8m0-5v5h5M4 16a8.5 8.5 0 0 0 14 3l3-3m0 5v-5h-5"/></symbol>
+<symbol id="settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></symbol>
+<symbol id="grid" viewBox="0 0 24 24"><path d="M3 3h6v6H3zm12 0h6v6h-6zM3 15h6v6H3zm12 0h6v6h-6z"/></symbol>
+<symbol id="grades" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/></symbol>
+<symbol id="water" viewBox="0 0 24 24"><path d="M12 3S5 10 5 15a7 7 0 0 0 14 0c0-5-7-12-7-12z"/></symbol>
+<symbol id="air" viewBox="0 0 24 24"><path d="M12 2v20M3 7l18 10M3 17 21 7M9 4l3 3 3-3M9 20l3-3 3 3"/></symbol>
+<symbol id="arrow" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></symbol>
+<symbol id="building" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h1m4 0h1M9 11h1m4 0h1M10 21v-6h4v6"/></symbol>
+<symbol id="book" viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v15c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1zm0 0v15"/></symbol>
+<symbol id="widget" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 9v12"/></symbol>
+</defs></svg>
+<div class="app">
+<div class="glass-atmosphere" aria-hidden="true"></div>
+<header class="app-header"><div><span class="app-brand">湖北大学助手</span><h1 id="page-title">今天</h1></div><button class="room-button" data-go="settings" aria-label="宿舍与设置"><svg><use href="#building"/></svg><span><small>我的宿舍</small><strong id="header-room">尚未设置</strong></span><span aria-hidden="true">⌄</span></button></header>
+<main>
+<section id="page-home" class="page">
+  <div id="demo-banner" class="demo-banner" hidden>示例模式 · 全部为虚构数据 <button id="exit-demo">退出</button></div>
+  <button id="home-task-alert" class="home-task-alert" data-go="tasks" hidden><span class="home-alert-icon"><svg><use href="#bell"/></svg></span><span class="home-alert-copy"><strong id="home-task-alert-title"></strong><span id="home-task-alert-copy"></span><small>依据上次同步记录</small></span><span class="home-alert-arrow" aria-hidden="true">›</span></button>
+  <div class="home-date"><span id="today-date"></span><small id="today-week"></small></div>
+  <button id="today-card" class="panel today-card" data-go="timetable"><div class="panel-title"><span><svg><use href="#calendar"/></svg>今日课程</span><small id="today-count"></small></div><div id="today-courses"></div><p class="card-footer">查看完整课表 <span class="glass-arrow"><svg><use href="#arrow"/></svg></span></p></button>
+  <div class="home-section-heading"><h2>宿舍余量</h2><button class="text-button" data-go="fees">查看详情 ›</button></div>
+  <button class="panel dorm-card fee-entry" data-go="fees" aria-label="查看费用详情"><div class="home-balances">
+  <div class="fee-line"><svg><use href="#bolt"/></svg><span>照明</span><strong id="home-lighting">— —</strong><small>度</small><span id="home-lighting-state" class="status"></span></div>
+  <div class="fee-line"><svg><use href="#air"/></svg><span>空调</span><strong id="home-air">— —</strong><small>度</small><span id="home-air-state" class="status"></span></div>
+  <div class="fee-line"><svg><use href="#water"/></svg><span>水费</span><strong id="home-water">— —</strong><small>元</small><span id="home-water-state" class="status"></span></div>
+  </div><p class="card-footer">费用详情与用电趋势 <span aria-hidden="true">›</span></p></button><div class="home-balance-meta"><p id="home-room" class="muted"></p><button id="home-refresh" class="icon-button" data-action="sync" aria-label="刷新三项费用"><svg><use href="#sync"/></svg></button></div>
+  <div id="sync-feedback" class="feedback" role="status" aria-live="polite" hidden></div>
+  <button id="home-tasks-card" class="panel tasks-home-card" data-go="tasks"><div class="panel-title"><span><svg><use href="#bell"/></svg>学习通待办</span><small id="home-task-count"></small></div><div id="home-task-preview"></div><p id="home-task-sync" class="task-home-sync"></p><p class="card-footer">查看全部待办 <span class="glass-arrow"><svg><use href="#arrow"/></svg></span></p></button>
+  <div class="home-section-heading"><h2>校园日常</h2></div>
+  <div class="campus-services"><button class="widget-promo" id="library-button"><span class="service-icon"><svg><use href="#book"/></svg></span><span>图书馆预约<small>通过微信前往</small></span><svg><use href="#arrow"/></svg></button>
+  <button class="widget-promo" id="widget-button"><span class="service-icon"><svg><use href="#widget"/></svg></span><span>桌面课表<small>彩色课程小组件</small></span><b>＋</b></button><button class="widget-promo task-widget-promo" data-go="widgets"><span class="service-icon"><svg><use href="#bell"/></svg></span><span>桌面待办<small>作业、考试与通知</small></span><b>＋</b></button></div>
+  <details class="home-usage"><summary>近 7 天用电 <span>查看趋势</span></summary><p id="seven-summary" class="chart-summary"></p><div id="home-chart" class="usage-chart"></div><p class="legend"><i></i>照明 <i class="air-dot"></i>空调 <span>虚线为跨日估算</span></p></details>
+  <button id="demo-button" class="text-button demo-link">先看看示例效果 ↗</button><p class="footnote">湖北大学助手 · 测试版 v0.8 · 数据仅保存在本机</p>
+</section>
+<section id="page-tasks" class="page tasks-page" hidden>
+  <div class="page-actions"><button data-go="home">‹ 今天</button><button id="tasks-refresh" class="text-button" data-action="tasksSync"><svg><use href="#sync"/></svg><span>刷新待办</span></button></div>
+  <article class="panel tasks-hero"><div class="panel-title"><span><svg><use href="#bell"/></svg>学习通待办</span><span id="tasks-last-sync" class="task-sync-time"></span></div><h2 id="tasks-heading">今天没有紧急待办</h2><p id="tasks-subheading" class="small-note">打开助手后会更新作业、考试和通知。</p></article>
+  <div class="task-filters" role="tablist" aria-label="待办筛选"><button class="selected" data-task-filter="all" role="tab">全部 <b id="task-filter-all-count"></b></button><button data-task-filter="homework" role="tab">作业 <b id="task-filter-homework-count"></b></button><button data-task-filter="exam" role="tab">考试 <b id="task-filter-exam-count"></b></button><button data-task-filter="notice" role="tab">通知 <b id="task-filter-notice-count"></b></button></div>
+  <div id="tasks-feedback" class="feedback" role="status" aria-live="polite" hidden></div>
+  <div id="tasks-priority" class="task-priority" hidden><span class="priority-icon"><svg><use href="#bell"/></svg></span><div><strong id="tasks-priority-title"></strong><p id="tasks-priority-copy"></p></div><span class="priority-label">优先处理</span></div>
+  <div id="tasks-list" class="tasks-list"></div>
+  <div id="tasks-empty" class="empty-state task-empty"><svg><use href="#bell"/></svg><h3>还没有学习通待办</h3><p>登录学习通后，作业、考试和未读通知会出现在这里。</p></div>
+  <button class="secondary-button task-widget-link" data-go="widgets"><svg><use href="#widget"/></svg> 添加学习通待办小组件 <span aria-hidden="true">›</span></button>
+  <p class="small-note task-cache-note">待办依据最近一次同步的本机记录。完成事项会在下次打开助手同步后更新。</p>
+  <!-- Primary: current tasks; secondary: reversible display controls; tertiary: period evidence.
+       Reuse liquid --glass/--line/--radius/--ink/--muted/--teal, existing 12/16/24 spacing. -->
+  <details id="tasks-management" class="panel task-management">
+    <summary><span>显示管理</span><small id="tasks-hidden-count">课程范围 · 隐藏消息</small></summary>
+    <p id="tasks-period-note" class="small-note"></p>
+    <label class="task-old-toggle"><input id="tasks-hide-old-notices" type="checkbox" checked><span>收起本学期以前的通知</span></label>
+    <p class="small-note">通知时间未知时保留。隐藏只影响本助手，学习通原消息不变。</p>
+    <details class="task-management-group"><summary>课程同步范围 <small id="tasks-course-count"></small></summary><p class="small-note">首次完整扫描，后续按开课时间估算学期（2 月春季、7 月秋季）。时期未知的课程保留，可手动调整。</p><div id="tasks-course-list"></div></details>
+    <details class="task-management-group"><summary>已隐藏的消息 <small id="tasks-suppressed-count"></small></summary><div id="tasks-suppressed-list"></div><button id="tasks-restore-hidden" class="text-button">恢复所有手动隐藏</button></details>
+  </details>
+  <button id="tasks-login-entry" class="secondary-button task-login-entry" data-action="tasksLogin">去登录学习通</button>
+</section>
+<section id="page-widgets" class="page widget-preview-page" hidden>
+  <div class="page-actions"><button data-go="home">‹ 今天</button><span class="preview-chip">外观预览</span></div>
+  <p class="widget-intro">把今天的课程和待办，放在桌面上。</p>
+  <div class="widget-surface">
+    <div class="widget-example-heading"><h2>课表小组件</h2><span>4 × 2</span></div>
+    <article class="desktop-widget course-widget" aria-label="桌面课表组件预览"><header><span><svg><use href="#calendar"/></svg> 今日课程 / <span id="widget-preview-day"></span></span><small id="widget-preview-week"></small></header><div id="widget-course-preview"></div></article><button class="secondary-button" data-action="widget">添加课表小组件</button>
+    <div class="widget-example-heading"><h2>学习通待办小组件</h2><span>4 × 2</span></div>
+    <article class="desktop-widget task-desktop-widget" aria-label="桌面学习通待办组件预览"><header><span><svg><use href="#bell"/></svg> 学习通待办</span><small id="widget-task-count"></small></header><div id="widget-tasks-preview"></div><p class="widget-cache" id="widget-task-cache"></p></article><button class="secondary-button" data-action="tasksWidget">添加待办小组件</button>
+  </div>
+  <p class="small-note">安卓应用可分别添加两种桌面小组件。小组件依据本机缓存显示，系统约每 30 分钟更新，可能延迟；点击打开助手即可同步。</p>
+</section>
+<section id="page-fees" class="page" hidden>
+  <div class="page-actions"><button data-go="home">‹ 今天</button><button data-action="sync" class="text-button"><svg><use href="#sync"/></svg>刷新三项</button></div>
+  <div class="fee-grid"><article class="panel metric"><div class="metric-heading">照明<button data-action="lighting" aria-label="刷新照明">↻</button></div><strong><span id="lighting-energy">— —</span> <small>度</small></strong><p>≈ <span id="lighting-money">— —</span> 元</p><p id="lighting-estimate" class="teal"></p><small id="lighting-time"></small></article>
+  <article class="panel metric"><div class="metric-heading">空调<button data-action="aircon" aria-label="刷新空调">↻</button></div><strong><span id="air-energy">— —</span> <small>度</small></strong><p>≈ <span id="air-money">— —</span> 元</p><p id="air-estimate" class="teal"></p><small id="air-time"></small></article>
+  <article class="panel metric water-metric"><div><div class="metric-heading">水费账户</div><strong>¥ <span id="water-money">— —</span></strong><p id="water-time"></p></div><button data-action="water" class="icon-button" aria-label="刷新水费"><svg><use href="#sync"/></svg></button></article></div>
+  <div id="fee-feedback" class="feedback" role="status" hidden></div><div id="low-warning" class="feedback warning" hidden></div>
+  <button id="sync-button" class="primary-button" data-action="sync"><svg><use href="#sync"/></svg><span>刷新照明、空调和水费</span></button><p class="small-note">每项独立保存查询时间，失败时保留原结果。</p>
+  <button id="school-button" class="text-button" data-action="school">打开后勤页面 / 重新登录 ↗</button>
+  <article class="panel"><div class="panel-title"><span class="teal">每日用电量</span><div class="range-control"><button data-range="7" class="selected">7 天</button><button data-range="30">30 天</button><button data-range="90">90 天</button></div></div><p id="usage-summary" class="chart-summary"></p><p class="legend"><i></i>照明 <i class="air-dot"></i>空调</p><p id="usage-hint" class="small-note">点柱状条查看当天用电量。</p><div id="fees-chart" class="usage-chart large" role="group" aria-label="每日用电量" aria-describedby="usage-hint"></div><p class="small-note">按相邻本机查询记录计算。跨日采样按天均摊并标记估算；余额增加不当作负用量。不等同于学校账单。</p></article>
+  <article class="panel"><div class="panel-title teal">最近查询</div><div id="history-list"></div></article>
+</section>
+<section id="page-timetable" class="page timetable-page" hidden>
+  <div class="timetable-view-control" role="group" aria-label="课表显示方式"><button type="button" id="view-agenda" aria-pressed="false">日程</button><button type="button" id="view-week" aria-pressed="true">周课表</button></div>
+  <div class="week-toolbar"><button id="prev-week" aria-label="上一周">‹</button><button id="week-now">本周</button><select id="week-select" aria-label="选择周次"></select><button id="next-week" aria-label="下一周">›</button></div>
+  <div class="term-toolbar"><span id="term-badge">未导入</span><button id="course-add" class="text-button">＋ 添加课程</button><button id="timetable-import" class="text-button">导入学期课表 ↗</button></div>
+  <div id="term-setup" class="feedback">导入后设置第一周的周一日期，今日课程和小组件才会按日期显示。<button class="text-button" data-go="settings">设置日期 ›</button></div>
+  <div id="timetable-scroll" class="timetable-scroll"><div id="timetable-grid" class="timetable-grid"></div></div>
+  <div id="timetable-agenda" hidden><div id="agenda-days" class="agenda-days" role="group" aria-label="选择星期"></div><div class="agenda-heading"><h2 id="agenda-date"></h2><span id="agenda-count"></span></div><div id="agenda-courses"></div></div>
+  <div id="timetable-empty" class="empty-state" hidden><h3>还没有课表</h3><p>从教务系统选择学期和「全部」周次，导入一次即可离线查看一学期。</p><button class="primary-button" id="empty-import">导入学期课表</button></div>
+  <p id="timetable-note" class="small-note"></p><p class="small-note timetable-edit-note">点课程卡片可编辑或删除，支持仅调整当前周。重新导入会替换本机编辑。</p><article id="notes-card" class="panel" hidden><h3>待安排课程 / 备注</h3><div id="timetable-notes"></div></article>
+</section>
+<section id="page-grades" class="page" hidden>
+  <article class="panel grade-query"><div class="panel-title"><span><svg><use href="#grades"/></svg>课程成绩</span><button id="grade-terms-refresh" class="text-button">更新学期</button></div>
+  <label for="grade-term">选择学期</label><div class="grade-controls"><select id="grade-term" aria-label="选择成绩学期"></select><button id="grade-query" class="primary-button">查询成绩</button></div><p class="small-note">在助手内选择学期和查看结果。首次使用先获取学期列表，登录会在应用内完成。</p></article>
+  <div id="grade-feedback" class="feedback" role="status" aria-live="polite" hidden></div>
+  <p id="grade-time" class="small-note"></p>
+  <article id="grade-weighted" class="panel grade-weighted" hidden><h3>非公选课加权均分</h3><strong id="grade-weighted-value">—</strong><span> 分</span><p id="grade-weighted-scope" class="small-note"></p><p id="grade-weighted-skipped" class="small-note"></p><p class="small-note">Σ（百分制成绩 × 学分）÷ Σ 学分。按学校课程属性或性质排除公选课；文字成绩不擅自换算。按当前查询返回的记录计算，不合并补重记录，仅供参考。</p></article>
+  <div id="grade-summary" class="grade-summary" hidden></div>
+  <div id="grade-empty" class="empty-state"><h3 id="grade-empty-title">还没有成绩记录</h3><p id="grade-empty-copy">获取学校学期列表后，选择学期查询。</p></div>
+  <div id="grade-list" class="grade-list"></div><p class="small-note">数据来自学校教务系统，仅保存于本机。显示全部成绩，不合并补重记录；空白绩点保持空白。非公选课加权均分由助手计算，其余汇总为学校返回值。</p>
+</section>
+<section id="page-settings" class="page" hidden>
+  <article class="panel settings-panel"><h3>学期日期</h3><p>选择当前学期第一周的周一。课表和桌面小组件按此计算周次，不自动猜测校历。</p><form id="term-form"><label for="term-start">第一周周一</label><input id="term-start" type="date" required><button class="primary-button" type="submit">保存学期日期</button></form><p id="term-info" class="small-note"></p></article>
+  <article class="panel settings-panel"><h3>低电量提示</h3><form id="threshold-form"><label for="threshold">照明 / 空调提醒阈值（度）</label><input id="threshold" type="number" min="0" max="1000" step="0.1" required><button class="primary-button" type="submit">保存提醒阈值</button></form><p class="small-note">仅应用内提示，费用不在后台自动刷新。</p></article>
+  <article class="panel settings-panel task-settings"><div class="settings-heading"><h3>学习通待办</h3><span id="tasks-login-state" class="settings-status">未连接</span></div><p id="tasks-account-copy">登录后，在每次打开助手时更新作业、考试和未读通知。</p><button id="tasks-login-button" class="secondary-button" data-action="tasksLogin">登录学习通</button><button id="tasks-logout" class="text-button" hidden>退出登录并清除待办</button><button id="tasks-clear" class="text-button">清除学习通待办缓存</button></article>
+  <article class="panel settings-panel task-settings"><div class="settings-heading"><h3>应用内待办提醒</h3><label class="switch-row"><span>开启提醒</span><input id="tasks-reminder-enabled" type="checkbox" checked><i></i></label></div><div class="reminder-time-grid"><label for="tasks-reminder-start">作业截止前 · 小时<input id="tasks-reminder-start" type="text" value="24, 6, 1" placeholder="例如 24, 6, 1" inputmode="decimal"></label><label for="tasks-reminder-end">考试开始前 · 小时<input id="tasks-reminder-end" type="text" value="24, 1" placeholder="例如 24, 1" inputmode="decimal"></label></div><p class="small-note">多个时间用逗号隔开，例如 24, 6, 1。每次打开时同步；只在应用内提示，不用闹钟，也不在关闭后推送。23:00–7:00 仅提示不足 1 小时的紧急事项。</p><button id="tasks-reminder-save" class="secondary-button">保存提醒设置</button></article>
+  <article class="panel settings-links"><button id="settings-widget">课表与学习通待办小组件 <span>›</span></button><button id="settings-import">导入 / 重新导入学期课表 <span>›</span></button><button id="settings-demo">体验示例数据 <span>›</span></button><button id="clear-button">清空本机费用、课表、成绩和待办 <span>›</span></button></article><p class="small-note">学习通可以长期保持登录。学校账号登录只能短暂保留，登录一次后，有效期间内即可查询费用、课表和成绩，失效后需重新登录。费用来自智慧后勤，课表来自教务系统。课表只在你主动导入时联网，之后本地查看；调课时可点课程卡片编辑并选择颜色。</p>
+</section>
+</main>
+<nav class="bottom-nav" aria-label="主导航"><span class="nav-lens" aria-hidden="true"></span><button data-page="home" class="active"><svg><use href="#calendar"/></svg><span>今天</span></button><button data-page="timetable"><svg><use href="#grid"/></svg><span>课表</span></button><button data-page="grades"><svg><use href="#grades"/></svg><span>成绩</span></button><button data-page="tasks" class="nav-tasks"><svg><use href="#bell"/></svg><span>待办</span><b id="nav-task-count" class="nav-task-badge" hidden></b></button><button data-page="settings"><svg><use href="#settings"/></svg><span>设置</span></button></nav>
+</div>
+<div id="course-editor" class="modal editor-modal" hidden><div class="modal-shade"></div><section class="modal-card editor-card" role="dialog" aria-modal="true" aria-labelledby="editor-title">
+  <div class="editor-heading"><h2 id="editor-title">编辑课程</h2><button id="editor-close" type="button" aria-label="关闭课程编辑">×</button></div>
+  <form id="course-form">
+    <label for="course-scope">修改范围</label><select id="course-scope"><option value="week">仅当前周</option><option value="all">这条安排的全部周次</option></select><p id="scope-note" class="editor-note"></p>
+    <label for="course-name">课程名称</label><input id="course-name" maxlength="100" required autocomplete="off">
+    <div class="editor-fields"><div><label for="course-weekday">星期</label><select id="course-weekday"><option value="1">周一</option><option value="2">周二</option><option value="3">周三</option><option value="4">周四</option><option value="5">周五</option><option value="6">周六</option><option value="7">周日</option></select></div><div><label for="course-room">教室</label><input id="course-room" maxlength="100" autocomplete="off"></div></div>
+    <div class="editor-fields"><div><label for="course-start">开始节次</label><select id="course-start"></select></div><div><label for="course-end">结束节次</label><select id="course-end"></select></div></div>
+    <!-- 周次与单双周为一组，复用现有输入框和提示样式；保存仍为唯一主要操作。 -->
+    <label for="course-weeks">上课周次</label><input id="course-weeks" placeholder="例如 1-16、1-8,10-16" maxlength="180" required autocomplete="off" aria-describedby="course-pattern-note">
+    <label for="course-pattern">单双周</label><select id="course-pattern" aria-describedby="course-pattern-note"><option value="all">每周</option><option value="odd">单周</option><option value="even">双周</option></select><small id="course-pattern-note" class="editor-note">可填 1–30 周；区间用短横线，不连续周次用逗号。单双周按学期周次筛选。</small>
+    <label for="course-teacher">教师</label><input id="course-teacher" maxlength="100" autocomplete="off">
+    <fieldset class="color-field"><legend>课程颜色</legend><div id="course-swatches" class="color-swatches"></div><label class="custom-color" for="course-color">自选颜色 <input id="course-color" type="color" value="#ab75c3"><span id="course-color-value"></span></label><div id="course-color-preview" class="course-color-preview">课程卡片颜色预览</div></fieldset>
+    <p id="editor-error" class="editor-error" role="alert" hidden></p><p class="editor-note">只修改本机课表，今日课程和小组件使用相同安排与颜色。</p>
+    <div class="editor-actions"><button id="course-delete" type="button" class="danger-button">删除课程</button><button id="course-save" type="submit" class="primary-button">保存修改</button></div>
+  </form>
+</section></div>
+<div id="modal" class="modal" hidden><div class="modal-shade"></div><section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title"><h2 id="modal-title"></h2><p id="modal-text"></p><div class="modal-actions"><button id="modal-cancel">取消</button><button id="modal-confirm">知道了</button></div></section></div><div id="toast" class="toast" role="status" hidden></div>
+<div id="usage-popup" class="usage-popup" role="tooltip" aria-live="polite" aria-atomic="true" hidden></div></body></html>

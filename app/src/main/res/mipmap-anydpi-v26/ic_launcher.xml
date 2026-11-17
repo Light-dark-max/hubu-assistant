@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- API 33 resolves the qualified icon containing the monochrome layer. -->
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:ignore="MonochromeLauncherIcon"><background android:drawable="@drawable/ic_energy_background"/><foreground android:drawable="@drawable/ic_energy_foreground"/></adaptive-icon>
