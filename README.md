@@ -6,7 +6,7 @@
 
 ## 下载
 
-进入 [测试版 v0.8 下载页](https://github.com/Light-dark-max/hubu-assistant/releases/tag/v0.8-beta)，下载 `湖北大学助手-测试版-v0.8.apk`。
+进入 [测试版 v0.8 下载页](https://github.com/Light-dark-max/hubu-assistant/releases/tag/v0.8-beta)，下载 `hubu-assistant-v0.8-beta.apk`。
 
 支持 Android 6.0 及以上，暂不支持 iOS。安装前请核对来源和校验值；已有用户覆盖安装前不要卸载旧版，以免丢失本机数据。自行编译的安装包与发布包签名可能不同，无法直接覆盖。
 
